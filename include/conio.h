@@ -74,6 +74,39 @@
 #define _SOLIDCURSOR   1
 #define _NORMALCURSOR  2
 
+/*
+ * keys that getkey returns for the escape sequences ANSI and VT100
+ * terminals send, the other keys are returned as their character
+ */
+#define KEY_UP       0x100
+#define KEY_DOWN     0x101
+#define KEY_RIGHT    0x102
+#define KEY_LEFT     0x103
+#define KEY_HOME     0x104
+#define KEY_END      0x105
+#define KEY_INSERT   0x106
+#define KEY_DELETE   0x107
+#define KEY_PGUP     0x108
+#define KEY_PGDN     0x109
+#define KEY_F1       0x10a
+#define KEY_F2       0x10b
+#define KEY_F3       0x10c
+#define KEY_F4       0x10d
+#define KEY_F5       0x10e
+#define KEY_F6       0x10f
+#define KEY_F7       0x110
+#define KEY_F8       0x111
+#define KEY_F9       0x112
+#define KEY_F10      0x113
+#define KEY_F11      0x114
+#define KEY_F12      0x115
+
+/* cgetline returns this when Ctrl-C is typed */
+#define CGETLINE_CANCEL  (-1)
+
+/* the longest line cgetline reads, not counting the zero at the end */
+#define CGETLINE_MAX  255
+
 /* size of the buffer cprintf formats its output in */
 #ifndef CPRINTF_MAX
 #define CPRINTF_MAX   128
@@ -101,6 +134,9 @@ int getche(void);
 int putch(int ch);
 int cputs(const char *s);
 char *cgets(char *buf);
+int getkey(void);
+int cgetline(char *buf, int size);
+void cgethistory(char *hist, int size);
 int cprintf(const char *fmt, ...);
 
 /* screen and cursor control */
